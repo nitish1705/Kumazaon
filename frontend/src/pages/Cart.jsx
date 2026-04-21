@@ -3,7 +3,7 @@ import { Trash2, ShoppingBag } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
+const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
 
 const Cart = ({ cart, updateQuantity, removeFromCart, clearCart, user }) => {
   const navigate = useNavigate();

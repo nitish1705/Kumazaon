@@ -9,6 +9,12 @@ export default defineConfig({
     port: 3000,      // Forces Vite to use port 3000 (which your cloud IDE prefers)
     strictPort: true, 
     allowedHosts: true, // Allows the specific .ws4.app domain to connect
-    cors: true
+    cors: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5051',
+        changeOrigin: true
+      }
+    }
   }
 })

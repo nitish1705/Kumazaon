@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
+const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
 
 const Signup = ({ setUser }) => {
   const [name, setName] = useState('');
