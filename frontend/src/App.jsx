@@ -6,6 +6,7 @@ import Cart from './pages/Cart'
 import Category from './pages/Category'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import AdminPanel from './pages/AdminPanel'
 
 function App() {
   const [cart, setCart] = useState(() => {
@@ -67,6 +68,7 @@ function App() {
             <Route path="/category/:categoryName" element={<Category addToCart={addToCart} />} />
             <Route path="/login" element={<Login setUser={setUser} />} />
             <Route path="/signup" element={<Signup setUser={setUser} />} />
+            <Route path="/admin" element={<AdminPanel user={user} />} />
           </Routes>
         </main>
       </div>

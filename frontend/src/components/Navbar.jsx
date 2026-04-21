@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Search, Menu, X, User, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -136,6 +135,9 @@ const Navbar = ({ cartItemCount, user, setUser }) => {
                 <div className="mb-4">
                   <h3 className="font-bold text-gray-900 text-lg mb-2 px-6">Settings</h3>
                   <ul className="space-y-1 text-gray-700">
+                     {user && user.role === 'admin' && (
+                       <li><Link to="/admin" onClick={() => setIsSidebarOpen(false)} className="flex justify-between items-center py-3 px-6 hover:bg-gray-200"><span>Admin Panel</span></Link></li>
+                     )}
                      <li><Link to={user ? "/" : "/login"} onClick={() => { if(!user) setIsSidebarOpen(false); else handleLogout(); }} className="flex justify-between items-center py-3 px-6 hover:bg-gray-200"><span>{user ? "Sign Out" : "Sign In"}</span></Link></li>
                   </ul>
                 </div>

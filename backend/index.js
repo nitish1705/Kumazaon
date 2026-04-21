@@ -19,6 +19,7 @@ app.use('/api/auth', require('./routes/auth'));
 
 // We will attach our other routers here later
 app.use('/api/orders', require('./routes/orders'));
+app.use('/api/admin', require('./routes/admin'));
 // app.use('/api/users', require('./routes/users'));
 
 app.listen(PORT, '0.0.0.0', () => {
