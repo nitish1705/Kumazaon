@@ -7,13 +7,17 @@ async function initDB() {
         // Connect without database first
         const connection = await mysql.createConnection({
             host: process.env.DB_HOST || 'localhost',
+            port: process.env.DB_PORT || 3306,
             user: process.env.DB_USER || 'root',
-            password: process.env.DB_PASSWORD || ''
+            password: process.env.DB_PASSWORD || '',
+            ssl: {
+                rejectUnauthorized: false
+            }
         });
 
         console.log("Creating database ecommerce_db if not exists...");
         await connection.query('CREATE DATABASE IF NOT EXISTS ecommerce_db');
-        await connection.query('USE ecommerce_db');
+        await connection.query(`USE ${process.env.DB_NAME || 'ecommerce_db'}`);
 
         console.log("Creating users table...");
         await connection.query(`
@@ -44,7 +48,7 @@ async function initDB() {
             CREATE TABLE IF NOT EXISTS order_items (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 order_id INT NOT NULL,
-                product_id INT NOT NULL, /* For now this will just be referencing dummy product id or stored as int */
+                product_id INT NOT NULL,
                 product_title VARCHAR(255) NOT NULL,
                 price DECIMAL(10, 2) NOT NULL,
                 quantity INT DEFAULT 1,
