@@ -49,9 +49,17 @@ const Navbar = ({ cartItemCount, user, setUser }) => {
 
             <div className="flex items-center space-x-2 md:space-x-4">
                {user ? (
-                 <div className="hidden md:flex flex-col hover:border-white border border-transparent p-1 rounded-sm text-sm cursor-pointer whitespace-nowrap">
-                   <span className="text-gray-300">Hello, {user.name}</span>
-                   <span className="font-bold cursor-pointer" onClick={handleLogout}>Account (Sign out)</span>
+                 <div className="hidden md:flex items-center space-x-4">
+                   <div className="flex flex-col text-sm cursor-default whitespace-nowrap">
+                     <span className="text-gray-300">Hello, {user.name}</span>
+                     <span className="font-bold">Account</span>
+                   </div>
+                   <button 
+                     onClick={handleLogout} 
+                     className="bg-gray-200 hover:bg-gray-300 text-amazon font-bold py-1 px-3 rounded-sm text-sm transition-colors cursor-pointer border border-gray-400"
+                   >
+                     Sign Out
+                   </button>
                  </div>
                ) : (
                  <Link to="/login" className="hidden md:flex flex-col hover:border-white border border-transparent p-1 rounded-sm text-sm">

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
@@ -8,8 +8,27 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 
 function App() {
-  const [cart, setCart] = useState([])
-  const [user, setUser] = useState(null)
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem('kumazon_cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem('kumazon_user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('kumazon_cart', JSON.stringify(cart));
+  }, [cart]);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('kumazon_user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('kumazon_user');
+    }
+  }, [user]);
 
   const addToCart = (product) => {
     setCart(prev => {
