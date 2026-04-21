@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/Kumazaon/',
   server: {
     host: '0.0.0.0', // This exposes the server to the cloud network
     port: 3000,      // Forces Vite to use port 3000 (which your cloud IDE prefers)
