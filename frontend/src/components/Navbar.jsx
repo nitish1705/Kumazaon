@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Search, Menu, X, User, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';

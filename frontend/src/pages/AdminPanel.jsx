@@ -6,13 +6,9 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
 
 const AdminPanel = ({ user }) => {
   const [data, setData] = useState({ users: [], orders: [], orderItems: [] });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(user && user.role === 'admin');
+  const [error, setError] = useState(user && user.role === 'admin' ? '' : 'Access Denied. Administrator privileges required.');
   const [activeTab, setActiveTab] = useState('users');
-
-  useEffect(() => {
-    fetchAdminData();
-  }, []);
 
   const fetchAdminData = async () => {
     try {
@@ -25,6 +21,15 @@ const AdminPanel = ({ user }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (user && user.role === 'admin') {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      setTimeout(() => fetchAdminData(), 0);
+    } else {
+      // Error already initialized above
+    }
+  }, [user]);
 
   if (loading) {
     return (
@@ -84,7 +89,7 @@ const AdminPanel = ({ user }) => {
         className="mb-8"
       >
         <h1 className="text-4xl font-bold text-amazon mb-4">Admin Panel</h1>
-        <p className="text-gray-600">Welcome, {user.name}. Here you can view all database tables.</p>
+        <p className="text-gray-600">Welcome, {user?.name}. Here you can view all database tables.</p>
       </motion.div>
 
       {/* Tab Navigation */}

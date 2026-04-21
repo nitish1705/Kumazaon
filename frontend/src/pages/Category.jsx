@@ -6,21 +6,13 @@ import importedProducts from '../data/products.json';
 
 const Category = ({ addToCart }) => {
   const { categoryName } = useParams();
-  const [products, setProducts] = useState([]);
   
-  useEffect(() => {
-    // Decoding and matching our category string
-    const decodedCategory = decodeURIComponent(categoryName);
-    const filtered = importedProducts.filter(
-      p => p.category.toLowerCase() === decodedCategory.toLowerCase()
-    );
-    // Standardize to showing all matches or everything if "all"
-    if (decodedCategory.toLowerCase() === 'all') {
-      setProducts(importedProducts);
-    } else {
-      setProducts(filtered);
-    }
-  }, [categoryName]);
+  const decodedCategory = decodeURIComponent(categoryName || '');
+  const isAll = decodedCategory.toLowerCase() === 'all';
+  
+  const products = isAll 
+    ? importedProducts 
+    : importedProducts.filter(p => p.category.toLowerCase() === decodedCategory.toLowerCase());
 
   return (
     <div className="px-4 sm:px-6">

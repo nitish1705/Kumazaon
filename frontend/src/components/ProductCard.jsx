@@ -32,7 +32,7 @@ const ProductCard = ({ product, addToCart }) => {
                 <Star key={i} size={14} fill={i < Math.floor(product.rating || 4) ? "currentColor" : "none"} />
             ))}
             <span className="text-blue-600 text-xs ml-1 hover:underline cursor-pointer">
-               {Math.floor(Math.random() * 500) + 50}
+               {(parseInt(product.id) || 1) * 37 % 500 + 50}
             </span>
         </div>
         
